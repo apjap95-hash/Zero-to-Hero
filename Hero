@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero to Hero - Share Market Analytics</title>
+    <!-- Font Awesome Icons Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        /* Global & Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #05070c;
+            color: #ffffff;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        /* Top Market Ticker */
+        .ticker-wrap {
+            width: 100%;
+            background-color: #000000;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            letter-spacing: 0.5px;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ticker-name { color: #8c8c8c; }
+        .ticker-val { color: #ffffff; }
+        .ticker-down { color: #ef4444; }
+        .ticker-up { color: #22c55e; }
+
+        /* Navbar Header */
+        header {
+            background-color: rgba(5, 7, 12, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #141923;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5c060, #b8860b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 10px;
+            text-align: center;
+            border: 2px solid #e5c060;
+            box-shadow: 0 0 10px rgba(229, 192, 96, 0.3);
+        }
+        .nav-brand h1 {
+            font-size: 14px;
+            color: #e5c060;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .nav-brand p {
+            font-size: 11px;
+            color: #8c8c8c;
+            letter-spacing: 0.5px;
+        }
+        .btn-vip-nav {
+            background: linear-gradient(to right, #f1d677, #cfa23b);
+            color: #000000;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(207, 162, 59, 0.2);
+        }
+
+        /* Hero Container Section */
+        .hero-container {
+            padding: 50px 20px 30px 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-logo-large {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #2d323f 0%, #151922 100%);
+            margin: 0 auto 25px auto;
+            border: 3px solid #e5c060;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(229, 192, 96, 0.15);
+        }
+        .hero-logo-large .bull-bear {
+            font-size: 26px;
+            margin-bottom: 2px;
+        }
+        .hero-logo-large .logo-text-1 {
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .hero-logo-large .logo-text-2 {
+            font-size: 7px;
+            color: #e5c060;
+            letter-spacing: 0.5px;
+        }
+        
+        .live-signals-badge {
+            border: 1px solid #cfa23b;
+            background: rgba(207, 162, 59, 0.05);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f1d677;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        .hero-title {
+            font-size: 34px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e5c060;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+        .hero-desc {
+            font-size: 15px;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* Large Action Buttons */
+        .btn-telegram {
+            background: linear-gradient(to right, #f1d677, #cfa23b);
+            color: #000000;
+            width: 100%;
+            max-width: 450px;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 5px 25px rgba(207, 162, 59, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        /* Candlestick Decorative Section */
+        .chart-banner {
+            margin: 40px 20px;
+            background: #090e17;
+            border: 1px solid #141c2b;
+            border-radius: 12px;
+            padding: 25px 15px;
+            text-align: center;
+            background-image: linear-gradient(rgba(5, 7, 12, 0.85), rgba(5, 7, 12, 0.85)), url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+        }
+        .chart-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .chart-subtext {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        /* Content Sections Wrapper Layout */
+        .section-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section-tag {
+            font-size: 12px;
+            color: #e5c060;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .section-heading {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .section-desc {
+            font-size: 15px;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* Features Box Component */
+        .feature-item {
+            background-color: #070b14;
+            border: 1px solid #111827;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .feature-num {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid #e5c060;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e5c060;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .feature-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .feature-item p {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Testimonials Card Framework */
+        .review-card {
+            background-color: #0a0f1d;
+            border: 1px solid #161f30;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .stars-wrap {
+            color: #e5c060;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .profile-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar-initials {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(229, 192, 96, 0.15);
+            color: #e5c060;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .user-details h4 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .user-details p {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        /* VIP Premium Pricing Component */
