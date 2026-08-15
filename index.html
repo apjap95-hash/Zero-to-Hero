@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero to Hero - Share Market Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #05070c;
+            color: #ffffff;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+        .ticker-wrap {
+            width: 100%;
+            background-color: #000000;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            letter-spacing: 0.5px;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ticker-name { color: #8c8c8c; }
+        .ticker-val { color: #ffffff; }
+        .ticker-down { color: #ef4444; }
+        .ticker-up { color: #22c55e; }
+
+        header {
+            background-color: rgba(5, 7, 12, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #141923;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5c060, #b8860b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 10px;
+            text-align: center;
+            border: 2px solid #e5c060;
+            box-shadow: 0 0 10px rgba(229, 192, 96, 0.3);
+        }
+        .nav-brand h1 {
+            font-size: 14px;
+            color: #e5c060;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .nav-brand p {
+            font-size: 11px;
+            color: #8c8c8c;
+            letter-spacing: 0.5px;
+        }
+        .btn-vip-nav {
+            background: linear-gradient(to right, #f1d677, #cfa23b);
+            color: #000000;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(207, 162, 59, 0.2);
+        }
+
+        .hero-container {
+            padding: 50px 20px 30px 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-logo-large {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #2d323f 0%, #151922 100%);
+            margin: 0 auto 25px auto;
+            border: 3px solid #e5c060;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(229, 192, 96, 0.15);
+        }
+        .hero-logo-large .bull-bear {
+            font-size: 26px;
+            margin-bottom: 2px;
+        }
+        .hero-logo-large .logo-text-1 {
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .hero-logo-large .logo-text-2 {
+            font-size: 7px;
+            color: #e5c060;
+            letter-spacing: 0.5px;
+        }
+        
+        .live-signals-badge {
+            border: 1px solid #cfa23b;
+            background: rgba(207, 162, 59, 0.05);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f1d677;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        .hero-title {
+            font-size: 34px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e5c060;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+        .hero-desc {
+            font-size: 15px;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .btn-telegram {
+            background: linear-gradient(to right, #f1d677, #cfa23b);
+            color: #000000;
+            width: 100%;
+            max-width: 450px;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 5px 25px rgba(207, 162, 59, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticker-wrap">
+        <div class="ticker-item"><span class="ticker-name">NIFTY 50:</span> <span class="ticker-val">22,050.50</span> <span class="ticker-down">▼ -0.8%</span></div>
+        <div class="ticker-item"><span class="ticker-name">SENSEX:</span> <span class="ticker-val">72,560.10</span> <span class="ticker-up">▲ +0.6%</span></div>
+    </div>
+
+    <header>
+        <div class="nav-left">
+            <div class="nav-logo-circle">ZTH</div>
+            <div class="nav-brand">
+                <h1>ZERO TO HERO</h1>
+                <p>SHARE MARKET ANALYTICS</p>
+            </div>
+        </div>
+        <a href="#" class="btn-vip-nav">GET VIP ACCESS</a>
+    </header>
+
+    <div class="hero-container">
+        <div class="hero-logo-large">
+            <div class="bull-bear">🐂</div>
+            <div class="logo-text-1">ZERO TO HERO</div>
+            <div class="logo-text-2">SHARE MARKET ANALYTICS</div>
+        </div>
+
+        <div class="live-signals-badge">
+            <span class="dot"></span> LIVE MARKET SIGNALS
+        </div>
+
+        <h2 class="hero-title">Transform Your Trading</h2>
+        <h1 class="hero-subtitle">ZERO TO HERO</h1>
+        <p class="hero-desc">Access powerful institutional analytics, real-time data, and expert insights to master the Indian stock market.</p>
+
+        <a href="#" class="btn-telegram"><i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM</a>
+    </div>
+
+</body>
+</html>
