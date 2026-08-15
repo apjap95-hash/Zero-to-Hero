@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zero to Hero - Share Market Analytics</title>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Global & Reset Styles */
         * {
@@ -185,7 +184,7 @@
             margin-bottom: 35px;
         }
 
-        /* Large Action Buttons */
+        /* Action Button */
         .btn-telegram {
             background: linear-gradient(to right, #f1d677, #cfa23b);
             color: #000000;
@@ -201,137 +200,47 @@
             justify-content: center;
             gap: 12px;
             box-shadow: 0 5px 25px rgba(207, 162, 59, 0.3);
-            transition: transform 0.2s ease;
         }
+    </style>
+</head>
+<body>
 
-        /* Candlestick Decorative Section */
-        .chart-banner {
-            margin: 40px 20px;
-            background: #090e17;
-            border: 1px solid #141c2b;
-            border-radius: 12px;
-            padding: 25px 15px;
-            text-align: center;
-            background-image: linear-gradient(rgba(5, 7, 12, 0.85), rgba(5, 7, 12, 0.85)), url('https://unsplash.com');
-            background-size: cover;
-            background-position: center;
-        }
-        .chart-link {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .chart-subtext {
-            font-size: 12px;
-            color: #718096;
-        }
+    <!-- Ticker Section -->
+    <div class="ticker-wrap">
+        <div class="ticker-item"><span class="ticker-name">NIFTY 50:</span> <span class="ticker-val">22,050.50</span> <span class="ticker-down">▼ -0.8%</span></div>
+        <div class="ticker-item"><span class="ticker-name">SENSEX:</span> <span class="ticker-val">72,560.10</span> <span class="ticker-up">▲ +0.6%</span></div>
+    </div>
 
-        /* Content Sections Wrapper Layout */
-        .section-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .section-tag {
-            font-size: 12px;
-            color: #e5c060;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        .section-heading {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
+    <!-- Header -->
+    <header>
+        <div class="nav-left">
+            <div class="nav-logo-circle">ZTH</div>
+            <div class="nav-brand">
+                <h1>ZERO TO HERO</h1>
+                <p>SHARE MARKET ANALYTICS</p>
+            </div>
+        </div>
+        <a href="#" class="btn-vip-nav">GET VIP ACCESS</a>
+    </header>
 
-        /* Features Box Component */
-        .feature-item {
-            background-color: #070b14;
-            border: 1px solid #111827;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        .feature-num {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 1px solid #e5c060;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #e5c060;
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .feature-item h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .feature-item p {
-            font-size: 14px;
-            color: #94a3b8;
-            line-height: 1.6;
-        }
+    <!-- Main Hero Content -->
+    <div class="hero-container">
+        <div class="hero-logo-large">
+            <div class="bull-bear">🐂</div>
+            <div class="logo-text-1">ZERO TO HERO</div>
+            <div class="logo-text-2">SHARE MARKET ANALYTICS</div>
+        </div>
 
-        /* Testimonials Card Framework */
-        .review-card {
-            background-color: #0a0f1d;
-            border: 1px solid #161f30;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        .stars-wrap {
-            color: #e5c060;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .review-text {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #e2e8f0;
-            margin-bottom: 20px;
-        }
-        .profile-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .avatar-initials {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(229, 192, 96, 0.15);
-            color: #e5c060;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .user-details h4 {
-            font-size: 14px;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .user-details p {
-            font-size: 12px;
-            color: #718096;
-        }
+        <div class="live-signals-badge">
+            <span class="dot"></span> LIVE MARKET SIGNALS
+        </div>
 
-        /* VIP Premium Pricing Component */
-        .premium-access-box {
-            background-color: #090e17;
-            border: 1px solid #1e2530;
+        <h2 class="hero-title">Transform Your Trading</h2>
+        <h1 class="hero-subtitle">ZERO TO HERO</h1>
+        <p class="hero-desc">Access powerful institutional analytics, real-time data, and expert insights to master the Indian stock market.</p>
+
+        <a href="#" class="btn-telegram"><i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM</a>
+    </div>
+
+</body>
+</html>
